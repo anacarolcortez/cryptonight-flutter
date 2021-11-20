@@ -5,9 +5,8 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     final TextEditingController _valueController = TextEditingController();
-    
+
     return TextFormField(
       controller: _valueController,
       decoration: const InputDecoration(
@@ -23,7 +22,7 @@ class CustomTextField extends StatelessWidget {
         ),
       ),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
-      maxLength: 8,
+      maxLength: 10,
     );
   }
 }
