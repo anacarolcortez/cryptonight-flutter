@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 class CustomDropBox extends StatefulWidget {
   final List<String> list;
   String selectedItem;
-  
-  CustomDropBox({Key? key, required this.list, required this.selectedItem}) : super(key: key);
+  final void Function(String) callback;
+
+  CustomDropBox(
+      {Key? key,
+      required this.list,
+      required this.selectedItem,
+      required this.callback})
+      : super(key: key);
 
   @override
   State<CustomDropBox> createState() => _CustomDropBoxState();
 }
 
 class _CustomDropBoxState extends State<CustomDropBox> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,6 +44,7 @@ class _CustomDropBoxState extends State<CustomDropBox> {
               setState(() {
                 widget.selectedItem = newValue as String;
               });
+              widget.callback(newValue as String);
             }),
       ),
     );
