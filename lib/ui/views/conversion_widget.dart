@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cryptonight/model/currency_class.dart';
 import 'package:cryptonight/webappi/awesome_service.dart';
 import 'package:cryptonight/ui/components/conversion_results.dart';
@@ -36,11 +38,12 @@ class _ConversionWidget extends State<ConversionWidget> {
     });
   }
 
-  void getCurrencyData(String cryptoSelected) async {
+  void getCurrencyData(String cryptoSelected, double multVal) async {
     _cripto = await getCryptoValueFromApi(cryptoSelected);
+    double calculatedConversion = double.parse(_cripto.bid) * multVal;
     setState(() {
       _variation = _cripto.pctChange;
-      _convertedValue = _cripto.bid;
+      _convertedValue = '$calculatedConversion' ;
     });
   }
 
@@ -83,12 +86,15 @@ class _ConversionWidget extends State<ConversionWidget> {
               child: ElevatedButton(
                 child: const Text('CONVERTER'),
                 onPressed: () {
-                  if (!_validateFields()) {
-                    showAlertDialog(context);
-                  } else {
-                    String cryptoSelected = getCurrencyCode(_selectedCurrency);
-                    getCurrencyData(cryptoSelected);
-                  }
+                  Timer(Duration(seconds: 1), () {
+                    if (!_validateFields()) {
+                      showAlertDialog(context);
+                    } else {
+                      String cryptoSelected = getCurrencyCode(_selectedCurrency);
+                      double mult = double.parse(_valueController.text);
+                      getCurrencyData(cryptoSelected, mult);
+                    }
+                  });
                 },
               ),
             ),
@@ -149,13 +155,6 @@ class _ConversionWidget extends State<ConversionWidget> {
         currencyCode = 'BTC-BRL';
     }
     return currencyCode;
-  }
-
-  String getCalculatedValue(String value) {
-    double coinValue = double.parse(value);
-    double multiplyby = double.parse(_valueController.text);
-    double result = coinValue * multiplyby;
-    return '$result';
   }
 
 }
