@@ -44,7 +44,7 @@ class _ConversionWidget extends State<ConversionWidget> {
       double calculatedConversion = double.parse(_cripto.bid) * multVal;
       setState(() {
         _variation = _cripto.pctChange;
-        _convertedValue = calculatedConversion.toStringAsFixed(2);
+        _convertedValue = '${calculatedConversion.toStringAsFixed(2)}%';
       });
     });
   }
