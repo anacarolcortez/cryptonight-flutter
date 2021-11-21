@@ -63,7 +63,7 @@ class _ConversionWidget extends State<ConversionWidget> {
             TextFormField(
               controller: _valueController,
               decoration: const InputDecoration(
-                labelText: 'Valor em R\$',
+                labelText: 'Valor',
                 labelStyle: TextStyle(
                   color: Colors.blueGrey,
                 ),

@@ -18,7 +18,7 @@ class ConversionResults extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  convertedValue,
+                  'R\$ $convertedValue',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
