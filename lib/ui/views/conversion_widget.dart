@@ -1,4 +1,5 @@
 import 'package:cryptonight/model/currency_class.dart';
+import 'package:cryptonight/ui/components/circular_progress.dart';
 import 'package:cryptonight/webappi/awesome_service.dart';
 import 'package:cryptonight/ui/components/conversion_results.dart';
 import 'package:cryptonight/ui/components/custom_dropbox.dart';
@@ -24,21 +25,12 @@ class _ConversionWidget extends State<ConversionWidget> {
     'Dogecoin',
     'Ripple'
   ];
-  // Option 2
+
   String _selectedCurrency = 'Bitcoin';
-  String _convertedValue = '0.00';
-  String _variation = '0';
 
   void selectCurrency(String value) {
     setState(() {
       _selectedCurrency = value;
-    });
-  }
-
-  void upteResults(String currecyVal, String pct) {
-    setState(() {
-      _convertedValue = currecyVal;
-      _variation = pct;
     });
   }
 
@@ -59,12 +51,6 @@ class _ConversionWidget extends State<ConversionWidget> {
                 labelText: 'Valor em R\$',
                 labelStyle: TextStyle(
                   color: Colors.blueGrey,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.orange, width: 2.0),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 2.0),
                 ),
               ),
               keyboardType:
@@ -87,30 +73,15 @@ class _ConversionWidget extends State<ConversionWidget> {
               child: ElevatedButton(
                 child: const Text('CONVERTER'),
                 onPressed: () {
-                  if (_validateFields()) {
-                    String code = getCurrencyCode();
-                    // FutureBuilder<Currency>(
-                    //     future: getCryptoValue(code),
-                    //     builder: (context, snapshot) {
-                    //       if (snapshot.hasData) {
-                    //         String value = snapshot.data!.currencydata.bid;
-                    //         _variation =
-                    //             '${snapshot.data!.currencydata.pctChange} %';
-                    //         _convertedValue = getCalculatedValue(value);
-                    //       }
-                    //       return const CircularProgressIndicator();
-                    //     });
-                  } else {
+                  if (!_validateFields()) {
                     showAlertDialog(context);
+                  } else {
+                    String cryptoSelected = getCurrencyCode(_selectedCurrency);
+                    updateWidgetResults(context, cryptoSelected);
                   }
                 },
               ),
             ),
-            const SizedBox(
-              height: 24,
-            ),
-            ConversionResults(
-                convertedValue: _convertedValue, variation: _variation)
           ],
         ),
       ),
@@ -144,9 +115,9 @@ class _ConversionWidget extends State<ConversionWidget> {
     );
   }
 
-  String getCurrencyCode() {
+  String getCurrencyCode(String selectedCurrency) {
     String currencyCode;
-    switch (_selectedCurrency) {
+    switch (selectedCurrency) {
       case 'Ethereum':
         currencyCode = 'ETH-BRL';
         break;
@@ -170,5 +141,35 @@ class _ConversionWidget extends State<ConversionWidget> {
     double multiplyby = double.parse(_valueController.text);
     double result = coinValue * multiplyby;
     return '$result';
+  }
+
+  Widget updateWidgetResults(context, String cryptoSelected) {
+    return Column(children: [
+      const SizedBox(
+        height: 24,
+      ),
+      FutureBuilder<Currency>(
+        future: getCryptoValue(cryptoSelected),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return const ProgressCircle();
+            case ConnectionState.done:
+              return ConversionResults(
+                  convertedValue: snapshot.data!.bid,
+                  variation: snapshot.data!.pctChange);
+            case ConnectionState.none:
+              const Center(child: Text('Sem conexão'));
+              break;
+            case ConnectionState.active:
+              const Center(child: Text('Conexão ativa'));
+              break;
+          }
+          return const Center(
+            child: Text('Erro Inesperado'),
+          );
+        },
+      ),
+    ]);
   }
 }

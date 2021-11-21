@@ -1,10 +1,8 @@
 import 'package:cryptonight/ui/views/home_widget.dart';
-import 'package:cryptonight/webappi/awesome_service.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
-  getCryptoValue('BTC-BRL');
 }
 
 class MyApp extends StatelessWidget {
