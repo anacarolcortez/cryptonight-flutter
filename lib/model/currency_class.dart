@@ -4,8 +4,9 @@ class Currency {
   });
   late final Currencydata currencydata;
 
-  factory Currency.fromJson(Map<String, dynamic> json) {
-    return Currency(currencydata: Currencydata.fromJson(json['currencydata']));
+  factory Currency.fromJson(Map<String, dynamic> json, String currencyLabel) {
+    return Currency(currencydata: Currencydata.fromJson(json[currencyLabel]));
+    //o problema é que a String vem com nome que varia conforme a moeda
   }
 
   Map<String, dynamic> toJson() {
@@ -42,7 +43,18 @@ class Currencydata {
   late final String createDate;
 
   factory Currencydata.fromJson(Map<String, dynamic> json) {
-    return Currencydata(code: json['code'], codein: json['codein'], name: json['name'], high: json['high'], low: json['low'], varBid: json['varBid'], pctChange: json['pctChange'], bid: json['bid'], ask: json['ask'], timestamp: json['timestamp'], createDate: json['create_date']);
+    return Currencydata(
+        code: json['code'],
+        codein: json['codein'],
+        name: json['name'],
+        high: json['high'],
+        low: json['low'],
+        varBid: json['varBid'],
+        pctChange: json['pctChange'],
+        bid: json['bid'],
+        ask: json['ask'],
+        timestamp: json['timestamp'],
+        createDate: json['create_date']);
   }
 
   Map<String, dynamic> toJson() {
