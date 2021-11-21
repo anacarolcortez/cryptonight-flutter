@@ -7,20 +7,16 @@ class ConversionResults extends StatelessWidget {
   const ConversionResults(
       {Key? key, required this.convertedValue, required this.variation})
       : super(key: key);
-  //will become statefull soon. finishing  api request first
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(
-          width: 170,
-          height: 60,
+        Expanded(
           child: Card(
             child: Center(
-              child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
                   convertedValue,
                   style: const TextStyle(
@@ -31,22 +27,29 @@ class ConversionResults extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          width: 70,
-          height: 60,
+        Expanded(
           child: Center(
-              child: Row(
+            child: Row(
             children: [
-              Icon(
-                Icons.arrow_drop_up_rounded,
-                color: Colors.greenAccent[400],
-                size: 40,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  positive(variation)
+                      ? Icons.arrow_drop_up_rounded
+                      : Icons.arrow_drop_down_rounded,
+                  color: positive(variation)
+                      ? Colors.greenAccent[400]
+                      : Colors.red,
+                  size: 40,
+                ),
               ),
-              Text(
-                variation,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  variation,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -54,5 +57,13 @@ class ConversionResults extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  bool positive(String value) {
+    double val = double.parse(value);
+    if (val >= 0.0) {
+      return true;
+    }
+    return false;
   }
 }

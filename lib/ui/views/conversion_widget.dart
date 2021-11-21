@@ -1,5 +1,4 @@
 import 'package:cryptonight/model/currency_class.dart';
-import 'package:cryptonight/ui/components/circular_progress.dart';
 import 'package:cryptonight/webappi/awesome_service.dart';
 import 'package:cryptonight/ui/components/conversion_results.dart';
 import 'package:cryptonight/ui/components/custom_dropbox.dart';
@@ -27,10 +26,21 @@ class _ConversionWidget extends State<ConversionWidget> {
   ];
 
   String _selectedCurrency = 'Bitcoin';
+  String _variation = '0';
+  String _convertedValue = '--';
+  late Currency _cripto;
 
   void selectCurrency(String value) {
     setState(() {
       _selectedCurrency = value;
+    });
+  }
+
+  void getCurrencyData(String cryptoSelected) async {
+    _cripto = await getCryptoValueFromApi(cryptoSelected);
+    setState(() {
+      _variation = _cripto.pctChange;
+      _convertedValue = _cripto.bid;
     });
   }
 
@@ -77,11 +87,16 @@ class _ConversionWidget extends State<ConversionWidget> {
                     showAlertDialog(context);
                   } else {
                     String cryptoSelected = getCurrencyCode(_selectedCurrency);
-                    updateWidgetResults(context, cryptoSelected);
+                    getCurrencyData(cryptoSelected);
                   }
                 },
               ),
             ),
+            const SizedBox(
+              height: 24,
+            ),
+            ConversionResults(
+                convertedValue: _convertedValue, variation: _variation)
           ],
         ),
       ),
@@ -143,33 +158,4 @@ class _ConversionWidget extends State<ConversionWidget> {
     return '$result';
   }
 
-  Widget updateWidgetResults(context, String cryptoSelected) {
-    return Column(children: [
-      const SizedBox(
-        height: 24,
-      ),
-      FutureBuilder<Currency>(
-        future: getCryptoValue(cryptoSelected),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return const ProgressCircle();
-            case ConnectionState.done:
-              return ConversionResults(
-                  convertedValue: snapshot.data!.bid,
-                  variation: snapshot.data!.pctChange);
-            case ConnectionState.none:
-              const Center(child: Text('Sem conexão'));
-              break;
-            case ConnectionState.active:
-              const Center(child: Text('Conexão ativa'));
-              break;
-          }
-          return const Center(
-            child: Text('Erro Inesperado'),
-          );
-        },
-      ),
-    ]);
-  }
 }

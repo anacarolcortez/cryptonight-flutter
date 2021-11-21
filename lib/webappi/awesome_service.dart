@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:cryptonight/model/currency_class.dart';
 import 'package:http/http.dart' as http;
 
-Future<Currency> getCryptoValue(String currency) async {
+Future<Currency> getCryptoValueFromApi(String currency) async {
   List<String> currencyNameList = currency.split('-');
   String currencyName = currencyNameList[0] + currencyNameList[1];
 
@@ -35,6 +35,8 @@ Future<Currency> getCryptoValue(String currency) async {
       ask: ask,
       timestamp: timestamp,
       createDate: createDate);
+
+  print('1. Gerei o objeto na requisição: ${cryptoSelected.name}');
 
   return cryptoSelected;
 }
