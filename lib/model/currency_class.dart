@@ -1,46 +1,63 @@
 class Currency {
   Currency({
-    required this.cripto,
+    required this.currencydata,
   });
-  late final Cripto cripto;
+  late final Currencydata currencydata;
 
-  Currency.fromJson(Map<String, dynamic> json) {
-    cripto = Cripto.fromJson(json['Cripto']);
+  factory Currency.fromJson(Map<String, dynamic> json) {
+    return Currency(currencydata: Currencydata.fromJson(json['currencydata']));
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['Cripto'] = cripto.toJson();
+    _data['currencydata'] = currencydata.toJson();
     return _data;
   }
 }
 
-class Cripto {
-  Cripto({
+class Currencydata {
+  Currencydata({
     required this.code,
+    required this.codein,
     required this.name,
+    required this.high,
+    required this.low,
+    required this.varBid,
     required this.pctChange,
     required this.bid,
+    required this.ask,
+    required this.timestamp,
+    required this.createDate,
   });
-
   late final String code;
+  late final String codein;
   late final String name;
+  late final String high;
+  late final String low;
+  late final String varBid;
   late final String pctChange;
   late final String bid;
+  late final String ask;
+  late final String timestamp;
+  late final String createDate;
 
-  Cripto.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    name = json['name'];
-    pctChange = json['pctChange'];
-    bid = json['bid'];
+  factory Currencydata.fromJson(Map<String, dynamic> json) {
+    return Currencydata(code: json['code'], codein: json['codein'], name: json['name'], high: json['high'], low: json['low'], varBid: json['varBid'], pctChange: json['pctChange'], bid: json['bid'], ask: json['ask'], timestamp: json['timestamp'], createDate: json['create_date']);
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['code'] = code;
+    _data['codein'] = codein;
     _data['name'] = name;
+    _data['high'] = high;
+    _data['low'] = low;
+    _data['varBid'] = varBid;
     _data['pctChange'] = pctChange;
     _data['bid'] = bid;
+    _data['ask'] = ask;
+    _data['timestamp'] = timestamp;
+    _data['create_date'] = createDate;
     return _data;
   }
 }

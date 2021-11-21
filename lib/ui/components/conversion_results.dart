@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ConversionResults extends StatelessWidget {
-  const ConversionResults({Key? key}) : super(key: key);
+  final String convertedValue;
+  final String variation;
+
+  const ConversionResults(
+      {Key? key, required this.convertedValue, required this.variation})
+      : super(key: key);
   //will become statefull soon. finishing  api request first
 
   @override
@@ -10,15 +15,15 @@ class ConversionResults extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(
+        SizedBox(
           width: 170,
           height: 60,
           child: Card(
             child: Center(
               child: Card(
                 child: Text(
-                  '0,030',
-                  style: TextStyle(
+                  convertedValue,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -38,8 +43,8 @@ class ConversionResults extends StatelessWidget {
                 size: 40,
               ),
               Text(
-                '2%',
-                style: TextStyle(
+                variation,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
