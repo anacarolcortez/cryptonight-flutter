@@ -1,5 +1,6 @@
-import 'package:cryptonight/ui/views/conversion_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:cryptonight/ui/views/conversion_widget.dart';
+import 'news_widget.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -17,13 +18,10 @@ class _HomeWidgetState extends State<HomeWidget> {
   static const List<Widget> _widgetOptions = <Widget>[
     ConversionWidget(),
     Text(
-      'Index 1: Evolução',
+      'Pg com Gráficos de Evolução',
       style: optionStyle,
     ),
-    Text(
-      'Index 2: Notícias',
-      style: optionStyle,
-    ),
+    NewsWidget(),
   ];
 
   void _onItemTapped(int index) {

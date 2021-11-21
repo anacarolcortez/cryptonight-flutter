@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cryptonight/model/currency_class.dart';
 import 'package:cryptonight/webappi/awesome_service.dart';
 import 'package:cryptonight/ui/components/conversion_results.dart';
