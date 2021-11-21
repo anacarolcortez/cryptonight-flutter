@@ -29,7 +29,7 @@ class ConversionResults extends StatelessWidget {
         ),
         Expanded(
           child: Center(
-            child: Row(
+              child: Row(
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -46,7 +46,7 @@ class ConversionResults extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  variation,
+                  '$variation%',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
