@@ -89,17 +89,17 @@ class _ConversionWidget extends State<ConversionWidget> {
                 onPressed: () {
                   if (_validateFields()) {
                     String code = getCurrencyCode();
-                    FutureBuilder<Currency>(
-                        future: getCoinValue(code),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            String value = snapshot.data!.currencydata.bid;
-                            _variation =
-                                '${snapshot.data!.currencydata.pctChange} %';
-                            _convertedValue = getCalculatedValue(value);
-                          }
-                          return const CircularProgressIndicator();
-                        });
+                    // FutureBuilder<Currency>(
+                    //     future: getCryptoValue(code),
+                    //     builder: (context, snapshot) {
+                    //       if (snapshot.hasData) {
+                    //         String value = snapshot.data!.currencydata.bid;
+                    //         _variation =
+                    //             '${snapshot.data!.currencydata.pctChange} %';
+                    //         _convertedValue = getCalculatedValue(value);
+                    //       }
+                    //       return const CircularProgressIndicator();
+                    //     });
                   } else {
                     showAlertDialog(context);
                   }
