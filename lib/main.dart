@@ -1,8 +1,10 @@
 import 'package:cryptonight/ui/views/home_widget.dart';
+import 'package:cryptonight/webappi/news_service.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
+  getAllNews();
 }
 
 class MyApp extends StatelessWidget {
