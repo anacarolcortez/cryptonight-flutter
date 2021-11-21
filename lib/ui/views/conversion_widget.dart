@@ -40,10 +40,12 @@ class _ConversionWidget extends State<ConversionWidget> {
 
   void getCurrencyData(String cryptoSelected, double multVal) async {
     _cripto = await getCryptoValueFromApi(cryptoSelected);
-    double calculatedConversion = double.parse(_cripto.bid) * multVal;
-    setState(() {
-      _variation = _cripto.pctChange;
-      _convertedValue = '$calculatedConversion' ;
+    Timer(const Duration(seconds: 1), () {
+      double calculatedConversion = double.parse(_cripto.bid) * multVal;
+      setState(() {
+        _variation = _cripto.pctChange;
+        _convertedValue = calculatedConversion.toStringAsFixed(2);
+      });
     });
   }
 
@@ -86,15 +88,13 @@ class _ConversionWidget extends State<ConversionWidget> {
               child: ElevatedButton(
                 child: const Text('CONVERTER'),
                 onPressed: () {
-                  Timer(Duration(seconds: 1), () {
-                    if (!_validateFields()) {
-                      showAlertDialog(context);
-                    } else {
-                      String cryptoSelected = getCurrencyCode(_selectedCurrency);
-                      double mult = double.parse(_valueController.text);
-                      getCurrencyData(cryptoSelected, mult);
-                    }
-                  });
+                  if (!_validateFields()) {
+                    showAlertDialog(context);
+                  } else {
+                    String cryptoSelected = getCurrencyCode(_selectedCurrency);
+                    double mult = double.parse(_valueController.text);
+                    getCurrencyData(cryptoSelected, mult);
+                  }
                 },
               ),
             ),
@@ -156,5 +156,4 @@ class _ConversionWidget extends State<ConversionWidget> {
     }
     return currencyCode;
   }
-
 }
