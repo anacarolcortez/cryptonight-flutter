@@ -1,5 +1,5 @@
-import 'package:cryptonight/ui/components/custom_title.dart';
-import 'package:cryptonight/webappi/news_service.dart';
+import 'package:cryptonight/ui/components/circular_progress.dart';
+import 'package:cryptonight/repository/news_service.dart';
 import 'package:flutter/material.dart';
 
 class NewsWidget extends StatefulWidget {
@@ -13,10 +13,8 @@ class _NewsWidgetState extends State<NewsWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(children: [
-        const CustomTitle(title: 'Últimas Notícias'),
-        FutureBuilder<List>(
+        padding: const EdgeInsets.all(20),
+        child: FutureBuilder<List>(
             future: getAllNews(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
@@ -31,13 +29,12 @@ class _NewsWidgetState extends State<NewsWidget> {
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text('Teste'),
+                        title: Text(snapshot.data?[index].title),
+                        subtitle: Text(snapshot.data?[index].description),
                       );
                     });
               }
-              return const CircularProgressIndicator();
-            })
-      ]),
-    );
+              return const ProgressCircle();
+            }));
   }
 }

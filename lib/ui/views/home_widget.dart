@@ -12,14 +12,10 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   int _selectedIndex = 0;
 
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
   static const List<Widget> _widgetOptions = <Widget>[
     ConversionWidget(),
     Text(
       'Pg com Gráficos de Evolução',
-      style: optionStyle,
     ),
     NewsWidget(),
   ];

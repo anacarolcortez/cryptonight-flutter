@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cryptonight/model/currency_class.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 Future<Currency> getCryptoValueFromApi(String currency) async {
@@ -36,7 +37,8 @@ Future<Currency> getCryptoValueFromApi(String currency) async {
         ask: ask,
         timestamp: timestamp,
         createDate: createDate);
-    print('Request: ${cryptoSelected.name} ${cryptoSelected.bid}, ${cryptoSelected.pctChange}, ${cryptoSelected.timestamp}');
+    debugPrint(
+        'Request: ${cryptoSelected.name} ${cryptoSelected.bid}, ${cryptoSelected.pctChange}, ${cryptoSelected.timestamp}');
     return cryptoSelected;
   } else {
     throw Exception('Failed to load album');

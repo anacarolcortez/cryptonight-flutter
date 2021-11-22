@@ -7,11 +7,11 @@ class ProgressCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Column(
-      children: const [
-        CircularProgressIndicator(),
+      children: [
+        const CircularProgressIndicator(),
         Text(
           'Carregando...',
-          style: TextStyle(color: Colors.purple),
+          style: TextStyle(color: Colors.blueGrey[900]),
         )
       ],
     ));
