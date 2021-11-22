@@ -1,5 +1,6 @@
 import 'package:cryptonight/ui/components/circular_progress.dart';
 import 'package:cryptonight/repository/news_service.dart';
+import 'package:cryptonight/ui/components/news_card.dart';
 import 'package:flutter/material.dart';
 
 class NewsWidget extends StatefulWidget {
@@ -13,7 +14,7 @@ class _NewsWidgetState extends State<NewsWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(8),
         child: FutureBuilder<List>(
             future: getAllNews(),
             builder: (context, snapshot) {
@@ -28,13 +29,23 @@ class _NewsWidgetState extends State<NewsWidget> {
                     shrinkWrap: true,
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(snapshot.data?[index].title),
-                        subtitle: Text(snapshot.data?[index].description),
-                      );
+                      String title = snapshot.data?[index].title;
+                      String source = snapshot.data?[index].name;
+                      String urlImg = snapshot.data?[index].urlToImage;
+                      String date = getDate(snapshot.data?[index].publishedAt);
+                      return NewsCard(
+                          title: title,
+                          source: source,
+                          date: date,
+                          urlImg: urlImg);
                     });
               }
               return const ProgressCircle();
             }));
+  }
+
+  String getDate(String date) {
+    DateTime publilshedAt = DateTime.parse(date);
+    return "${publilshedAt.day}/${publilshedAt.month}/${publilshedAt.year}";
   }
 }
