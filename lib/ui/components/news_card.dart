@@ -37,7 +37,7 @@ class NewsCard extends StatelessWidget {
                 width: 8,
               ),
               SizedBox(
-                width: 200,
+                width: 240,
                 child: Column(
                   children: [
                     Text(
@@ -56,6 +56,9 @@ class NewsCard extends StatelessWidget {
                               fontSize: 14,
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          width: 4,
                         ),
                         Text(
                           date,
