@@ -4,5 +4,5 @@ App para acompanhar conversão de criptomoedas em reais, gráficos de evolução
 
 ## Telas
 
-[tela1]!(https://i.imgur.com/4xkVhkb.jpeg)
-[tela3]!(https://i.imgur.com/r2QkbvC.jpeg)
+![tela1](https://i.imgur.com/4xkVhkb.jpeg)
+![tela3](https://i.imgur.com/r2QkbvC.jpeg)
