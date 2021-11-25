@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-class Article{
-
+class Article {
   String name;
   String title;
   String description;
@@ -9,7 +8,6 @@ class Article{
   String urlToImage;
   String publishedAt;
   String content;
-
 
   Article({
     required this.name,
@@ -19,7 +17,7 @@ class Article{
     required this.urlToImage,
     required this.publishedAt,
     required this.content,
-});
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -45,9 +43,8 @@ class Article{
     );
   }
 
-
-  factory Article.fromJson(String source) => Article.fromMap(jsonDecode(source));
+  factory Article.fromJson(String source) =>
+      Article.fromMap(jsonDecode(source));
 
   String toJson() => jsonEncode(toMap());
-
 }

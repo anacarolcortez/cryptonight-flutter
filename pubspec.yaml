@@ -17,6 +17,7 @@ dependencies:
   http:
   http_interceptor:
   json_annotation: ^4.3.0
+  webview_flutter:
 
 
 dev_dependencies:

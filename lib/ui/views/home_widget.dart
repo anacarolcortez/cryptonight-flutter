@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cryptonight/ui/views/conversion_widget.dart';
-import 'news_widget.dart';
+import 'news_list_widget.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);

@@ -1,6 +1,7 @@
 import 'package:cryptonight/ui/components/circular_progress.dart';
 import 'package:cryptonight/repository/news_service.dart';
 import 'package:cryptonight/ui/components/news_card.dart';
+import 'package:cryptonight/ui/views/article_widget.dart';
 import 'package:flutter/material.dart';
 
 class NewsWidget extends StatefulWidget {
@@ -11,6 +12,15 @@ class NewsWidget extends StatefulWidget {
 }
 
 class _NewsWidgetState extends State<NewsWidget> {
+  void goToUrl(String url) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ArticleWidget(website: url),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,20 +35,25 @@ class _NewsWidgetState extends State<NewsWidget> {
               }
               if (snapshot.hasData) {
                 return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      String title = snapshot.data?[index].title;
-                      String source = snapshot.data?[index].name;
-                      String urlImg = snapshot.data?[index].urlToImage;
-                      String date = getDate(snapshot.data?[index].publishedAt);
-                      return NewsCard(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    String title = snapshot.data?[index].title;
+                    String source = snapshot.data?[index].name;
+                    String urlImg = snapshot.data?[index].urlToImage;
+                    String date = getDate(snapshot.data?[index].publishedAt);
+                    String url = snapshot.data?[index].url;
+                    return GestureDetector(
+                      onTap: () => goToUrl(url),
+                      child: NewsCard(
                           title: title,
                           source: source,
                           date: date,
-                          urlImg: urlImg);
-                    });
+                          urlImg: urlImg),
+                    );
+                  },
+                );
               }
               return const ProgressCircle();
             }));
