@@ -14,6 +14,9 @@ class NewsCard extends StatelessWidget {
     required this.urlImg,
   }) : super(key: key);
 
+  static const noImage =
+      'https://cdn.neemo.com.br/uploads/settings_webdelivery/logo/1630/no-image.png';
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,10 +30,12 @@ class NewsCard extends StatelessWidget {
                   SizedBox(
                       width: 120,
                       height: 120,
-                      child: Image.network(
-                        urlImg,
-                        fit: BoxFit.cover,
-                      )),
+                      child: urlImg.isNotEmpty
+                          ? Image.network(
+                              urlImg,
+                              fit: BoxFit.cover,
+                            )
+                          : Image.network(noImage)),
                 ],
               ),
               const SizedBox(
