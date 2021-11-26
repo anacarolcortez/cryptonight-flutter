@@ -41,7 +41,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             _selectedIndex = position;
           });
         },
-        barBackgroundColor: Colors.yellowAccent[400],
+        barBackgroundColor: Colors.yellowAccent[700],
         circleColor: Colors.black,
         activeIconColor: Colors.white,
       ),
