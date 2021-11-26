@@ -1,4 +1,5 @@
 import 'package:cryptonight/ui/views/home_widget.dart';
+import 'package:cryptonight/ui/views/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      home: const HomeWidget(),
+      home: const Splash(),
       theme: ThemeData(
         primaryColor: Colors.black,
         accentColor: Colors.yellow[600],
