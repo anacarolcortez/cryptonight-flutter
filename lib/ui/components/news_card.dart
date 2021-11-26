@@ -53,7 +53,7 @@ class NewsCard extends StatelessWidget {
                         Text(
                           source,
                           style: const TextStyle(
-                              fontSize: 14,
+                              fontSize: 12,
                               fontStyle: FontStyle.italic,
                               fontWeight: FontWeight.bold),
                         ),
@@ -63,7 +63,7 @@ class NewsCard extends StatelessWidget {
                         Text(
                           date,
                           style: const TextStyle(
-                              fontSize: 14, fontStyle: FontStyle.italic),
+                              fontSize: 12, fontStyle: FontStyle.italic),
                         ),
                       ],
                     )
