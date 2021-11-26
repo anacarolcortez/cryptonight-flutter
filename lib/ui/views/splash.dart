@@ -18,7 +18,7 @@ class Splash extends StatelessWidget {
       floatingActionButton: ElevatedButton(
         child: const Icon(Icons.arrow_forward_outlined),
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const HomeWidget()),
           );
