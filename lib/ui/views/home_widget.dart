@@ -1,3 +1,4 @@
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptonight/ui/views/conversion_widget.dart';
 import 'news_list_widget.dart';
@@ -20,12 +21,6 @@ class _HomeWidgetState extends State<HomeWidget> {
     NewsWidget(),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,25 +30,20 @@ class _HomeWidgetState extends State<HomeWidget> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.paid_outlined),
-            label: 'Conversão',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.show_chart_outlined),
-            label: 'Evolução',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.article_outlined),
-            label: 'Notícias',
-          ),
+      bottomNavigationBar: FancyBottomNavigation(
+        tabs: [
+          TabData(iconData: Icons.paid_outlined, title: "Conversão"),
+          TabData(iconData: Icons.show_chart_outlined, title: "Evolução"),
+          TabData(iconData: Icons.article_outlined, title: "Notícias"),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
-        backgroundColor: Colors.yellowAccent,
-        onTap: _onItemTapped,
+        onTabChangedListener: (position) {
+          setState(() {
+            _selectedIndex = position;
+          });
+        },
+        barBackgroundColor: Colors.yellowAccent[400],
+        circleColor: Colors.black,
+        activeIconColor: Colors.white,
       ),
     );
   }

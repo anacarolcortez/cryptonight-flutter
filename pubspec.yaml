@@ -18,7 +18,8 @@ dependencies:
   http_interceptor:
   json_annotation: ^4.3.0
   webview_flutter:
-
+  charts_flutter: ^0.12.0
+  fancy_bottom_navigation: ^0.3.2
 
 dev_dependencies:
   flutter_test:
